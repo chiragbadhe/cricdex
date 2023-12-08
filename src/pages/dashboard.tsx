@@ -1,6 +1,6 @@
 import Table from "@/components/Table/Table";
 import React from "react";
-import { useAccount } from "wagmi";
+import { useAccount, useBalance } from "wagmi";
 
 type Props = {};
 
@@ -36,6 +36,14 @@ function Dashboard({}: Props) {
 
   const addresslastSixDigits = address?.slice(-6);
 
+  const {
+    data: UserBalance,
+    isError,
+    isLoading,
+  } = useBalance({
+    address: address,
+  });
+
   return (
     <div className="container mx-auto">
       <div className="flex flex-col space-y-[12px] items-center justify-center pt-[50px] pb-[24px]">
@@ -48,7 +56,7 @@ function Dashboard({}: Props) {
 
       <div className="flex space-x-[32px] justify-center text-white/60">
         <div className="flex flex-col bg-white/10 border border-white/20 px-[24px] py-[6px]">
-          <span>Balance:</span> <span>120USDt</span>
+          <span>Balance:</span> <span>{UserBalance?.formatted}</span>
         </div>
         <div className="flex flex-col bg-white/10 border border-white/20 px-[24px] py-[6px]">
           <span>Player Invested:</span> <span>03 players</span>

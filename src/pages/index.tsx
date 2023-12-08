@@ -139,14 +139,14 @@ export default function Home() {
         </span>
       </div>
 
-      <div className="container mx-auto ">
+      {/* <div className="container mx-auto ">
         <p className="text-[24px] opacity-80">Raffle Details</p>
         <p className="flex flex-col opacity-70">
           <span>Match: ICC T20</span>
           <span>Deposit Time: 9 Dec to 10 Dec</span>
           <span>Reffle Ends: 15 Dec</span>
         </p>
-      </div>
+      </div> */}
 
       <Table columns={columns} data={data} />
     </main>

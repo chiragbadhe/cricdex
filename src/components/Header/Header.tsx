@@ -19,7 +19,7 @@ function Header({}: Props) {
           <div className="flex items-center justify-center space-x-[24px]">
             <Link href={"/"}>Home</Link>
             <Link href="/dashboard">Dashboard </Link>
-            <Link href="/discussions">Discussions</Link>
+            {/* <Link href="/discussions">Discussions</Link> */}
             <Link href="/howthisworks">How this works?</Link>
           </div>
           <button>
