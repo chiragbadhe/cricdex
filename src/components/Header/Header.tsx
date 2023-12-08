@@ -18,9 +18,11 @@ function Header({}: Props) {
           />
           <div className="flex items-center justify-center space-x-[24px]">
             <Link href={"/"}>Home</Link>
-            <Link href="/dashboard">Dashboard </Link>
-            {/* <Link href="/discussions">Discussions</Link> */}
-            <Link href="/howthisworks">How this works?</Link>
+            <Link href={"/mainapp"}>Main App</Link>
+            <Link href="/holdings">Holdings </Link>
+            <Link target="_blank" href="https://github.com/chiragbadhe/cricdex">
+              About Project
+            </Link>
           </div>
           <button>
             <ConnectButton />

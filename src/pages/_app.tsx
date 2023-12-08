@@ -10,13 +10,19 @@ import {
   RainbowKitProvider,
 } from "@rainbow-me/rainbowkit";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { base, baseSepolia } from "wagmi/chains";
+import {
+  base,
+  baseSepolia,
+  lineaTestnet,
+  scroll,
+  scrollSepolia,
+} from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import Header from "@/components/Header/Header";
 
 const { chains, publicClient } = configureChains(
-  [base, baseSepolia],
+  [baseSepolia, scrollSepolia, lineaTestnet],
   [
     alchemyProvider({ apiKey: "j0Vohheszw0TdgDtU59JgsNwuKPFhQ8G" }),
     publicProvider(),

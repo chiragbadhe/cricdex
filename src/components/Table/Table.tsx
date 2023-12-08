@@ -40,10 +40,7 @@ const TableComponent: React.FC<TableProps> = ({ columns, data }) => {
         {rows.map((row) => {
           prepareRow(row);
           return (
-            <tr
-              {...row.getRowProps()}
-              className="py-[10px] bg-white/10"
-            >
+            <tr {...row.getRowProps()} className="py-[10px] bg-white/10">
               {row.cells.map((cell) => (
                 <td
                   {...cell.getCellProps()}
