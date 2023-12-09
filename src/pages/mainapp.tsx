@@ -75,7 +75,7 @@ function App({}: Props) {
             ? (scoreVirat / 3).toFixed(2)
             : row.original.id === 2
             ? (scoreRohit / 3).toFixed(2)
-            : null}
+            : null} Dai
         </span>
       ),
     },

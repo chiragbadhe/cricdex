@@ -21,15 +21,26 @@ const columns = [
       );
     },
   },
-  { Header: "Trade", accessor: "trade" },
+  {
+    Header: "Trade",
+    accessor: "trade",
+    Cell: ({ row }: any) => (
+      <button
+        className="bg-red-400 px-[24px] py-[4px] text-black"
+        onClick={() => console.log("test")}
+      >
+        <span>Sell</span>
+      </button>
+    ),
+  },
 ];
 
 const data = [
   {
     id: 1,
     name: "Virat Kohli",
-    investedprice: 8,
-    currentprice: 7,
+    investedprice: 6.67,
+    currentprice: 8.33,
     trade: "Sell",
   },
 ];
