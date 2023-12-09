@@ -31,7 +31,7 @@ const { chains, publicClient } = configureChains(
 
 const { connectors } = getDefaultWallets({
   appName: "CrickDex",
-  projectId: "YOUR_PROJECT_ID",
+  projectId: "352a59ff9b9e31a8864e91b90b71de28",
   chains,
 });
 

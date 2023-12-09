@@ -14,6 +14,11 @@ export default function Home() {
     <main>
       <div className="container mx-auto flex items-center  h-screen -mt-[50px]">
         <div className="w-1/2 flex flex-col ">
+          <div className="flex pb-[10px]">
+            <p className="px-[24px] py-[6px] bg-[#71FF4C]/10 border border-[#71FF4C]/30 text-[#71FF4C]/60">
+              Future of Fantacy Cricket
+            </p>
+          </div>
           <p className="text-[60px] font-bold leading-[64px] pr-[50px]">
             <span>Buy Stocks in Cricket Players</span>{" "}
             <span className="text-[#71FF4C]"> Win Big Profits</span>

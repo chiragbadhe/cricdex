@@ -1,0 +1,17 @@
+<!-- Base Goerli Contract Addresses -->
+
+# CricDex: 0xA52Eb948A20FcfF178210dda04BF01E3B6cc17e2
+
+# Dai: 0xEb8CD6a4350D73a5016dFAC94ecC42Ffa970BEC2
+
+<!-- Scroll Sepolia Contract Addresses -->
+
+# Dai: 0x88ac0393DC7015a64Dc7A72485e566DA054D8D62
+
+# CricDex 0x02E1393d234EABBD58c3dd502f2C899bf31E0e36
+
+<!-- Scroll Sepolia Contract Addresses -->
+
+# Dai: 0x88ac0393DC7015a64Dc7A72485e566DA054D8D62
+
+# CricDex 0x02E1393d234EABBD58c3dd502f2C899bf31E0e36

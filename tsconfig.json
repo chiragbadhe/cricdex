@@ -17,6 +17,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/discussions.test"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/discussions.test", "contract/hardhat.config.ts"],
   "exclude": ["node_modules"]
 }
