@@ -12,6 +12,7 @@ import {
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import {
   base,
+  baseGoerli,
   baseSepolia,
   lineaTestnet,
   scroll,
@@ -22,7 +23,7 @@ import { publicProvider } from "wagmi/providers/public";
 import Header from "@/components/Header/Header";
 
 const { chains, publicClient } = configureChains(
-  [baseSepolia, scrollSepolia, lineaTestnet],
+  [baseGoerli, scrollSepolia],
   [
     alchemyProvider({ apiKey: "j0Vohheszw0TdgDtU59JgsNwuKPFhQ8G" }),
     publicProvider(),

@@ -1,51 +1,54 @@
 import GasApis from "@/components/GasApis/GasApi";
 import Table from "@/components/Table/Table";
 import React, { useEffect, useState } from "react";
-import { useContractRead } from "wagmi";
+import { useContractRead, useContractWrite, useNetwork } from "wagmi";
 import { CricDex } from "../abis/CricDex";
 import supabase from "@/utils/supabase";
+import { parseEther } from "viem";
+import { Chain } from "@rainbow-me/rainbowkit";
+
+import { getContractAddress } from "@/utils/getcontractaddress";
 
 type Props = {};
 
 function App({}: Props) {
-  const {
-    data: daiToken,
-    isError,
-    isLoading,
-  } = useContractRead({
-    address: "0xA52Eb948A20FcfF178210dda04BF01E3B6cc17e2",
+  const { chain, chains } = useNetwork();
+  const contractAddress = getContractAddress(chain?.id as any);
+
+  const { isLoading: DepositLoading, write: deposit } = useContractWrite({
+    address: contractAddress as any,
     abi: CricDex,
-    functionName: "daiToken",
+    functionName: "deposit",
   });
 
-  const [scoreVirat, setScoreVirat] = useState("20");
-  const [scoreRohit, setScoreRohit] = useState("10");
+  const [scoreVirat, setScoreVirat] = useState(20);
+  const [scoreRohit, setScoreRohit] = useState(10);
 
-  const [buyingTokens, setBuyingTokens] = useState({});
+  const [tokenToBuyVirat, setTokenToBuyVirat] = useState(0);
+  const [tokenToBuyRohit, setTokenToBuyRohit] = useState(0);
 
-  // const [shareVirat, setShareVirat] = useState();
-  // const [shareRohit, setShareRohit] = useState();
+  const [tokenDaiToBuyVirat, setTokenDaiToBuyVirat] = useState(0);
+  const [tokenDaiToBuyRohit, setTokenDaiToBuyRohit] = useState(0);
 
   function BuySelectedtoken({ playerId, totalPriceOfShare }: any) {
-    console.log(playerId, totalPriceOfShare);
+    console.log(playerId, (scoreRohit / 3) * totalPriceOfShare);
+
+    if (playerId === 1) {
+      deposit({
+        args: [
+          BigInt(playerId),
+          parseEther(((scoreVirat / 3) * totalPriceOfShare).toString()),
+        ],
+      });
+    } else if (playerId === 2) {
+      deposit({
+        args: [
+          BigInt(playerId),
+          parseEther(((scoreVirat / 3) * totalPriceOfShare).toString()),
+        ],
+      });
+    }
   }
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const { data, error } = await supabase
-  //       .from("your_table_name")
-  //       .select("*");
-
-  //     if (error) {
-  //       console.error(error);
-  //       return;
-  //     }
-
-  //     setData(data);
-  //   };
-
-  //   fetchData();
-  // }, []);
 
   const columns = [
     { Header: "Rank", accessor: "id" },
@@ -69,9 +72,9 @@ function App({}: Props) {
       Cell: ({ row }: any) => (
         <span>
           {row.original.id === 1
-            ? (parseFloat(scoreVirat) / 3).toFixed(2)
+            ? (scoreVirat / 3).toFixed(2)
             : row.original.id === 2
-            ? (parseFloat(scoreRohit) / 3).toFixed(2)
+            ? (scoreRohit / 3).toFixed(2)
             : null}
         </span>
       ),
@@ -79,12 +82,10 @@ function App({}: Props) {
     {
       Header: "Number of Shares To Buy",
       accessor: "tokentobuy",
-      Cell: ({ row }: any) => (
-        <TokenToBuyInput tokenNumber={row.original.tokentobuy} />
-      ),
+      Cell: ({ row }: any) => <TokenToBuyInput id={row.original.id} />,
     },
     {
-      Header: "Action",
+      Header: `Action ${DepositLoading ? "loading" : ""}`,
       accessor: "action",
       Cell: ({ row }: any) => (
         <button
@@ -92,11 +93,13 @@ function App({}: Props) {
           onClick={() =>
             BuySelectedtoken({
               playerId: row.original.id,
-              totalPriceOfShare: row.original.tokentobuy,
+              totalPriceOfShare:
+                (row.original.id === 1 && tokenToBuyVirat) ||
+                (row.original.id === 2 && tokenToBuyRohit),
             })
           }
         >
-          Buy
+          <span>Buy</span>
         </button>
       ),
     },
@@ -113,40 +116,50 @@ function App({}: Props) {
     },
   ];
 
-  function TokenToBuyInput({ tokenNumber }: any) {
-    const [tokens, setTokens] = useState(tokenNumber);
-
+  function TokenToBuyInput({ id }: any) {
     const handleTokenChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setTokens(event.target.value);
+      (id === 1 && setTokenToBuyVirat(event.target.value as any)) ||
+        (id === 2 && setTokenToBuyRohit(event.target.value as any));
     };
 
+    const inputValue =
+      (id === 1 && tokenToBuyVirat) || (id === 2 && tokenToBuyRohit);
     return (
-      <input
-        type="number"
-        value={tokens}
-        className="bg-transparent outline-none py-[4px] w-full"
-        onChange={handleTokenChange}
-        placeholder="Enter number of shares"
-      />
+      <div className="flex justify-between ">
+        <input
+          type="number"
+          value={inputValue.toString()}
+          className="bg-transparent outline-none py-[4px] w-[200px]"
+          onChange={handleTokenChange}
+          placeholder="Enter number of shares"
+        />
+        <div className="text-purple-500">
+          ~{" "}
+          {(id === 1 && tokenDaiToBuyVirat) || (id === 2 && tokenDaiToBuyRohit)}{" "}
+          Dai{" "}
+        </div>
+      </div>
     );
   }
 
   function PlayerScore({ id }: any) {
     const handleTokenChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      (id === 1 && setScoreVirat(event.target.value)) ||
-        (id === 2 && setScoreRohit(event.target.value));
+      (id === 1 && setScoreVirat(event.target.value as any)) ||
+        (id === 2 && setScoreRohit(event.target.value as any));
     };
 
     const inputValue = (id === 1 && scoreVirat) || (id === 2 && scoreRohit);
 
     return (
-      <input
-        type="number"
-        value={inputValue.toString()}
-        className="bg-transparent outline-none py-[4px] w-[100px]"
-        onChange={handleTokenChange}
-        placeholder={inputValue.toString()}
-      />
+      <>
+        <input
+          type="number"
+          value={inputValue.toString()}
+          className="bg-transparent outline-none py-[4px] w-[100px]"
+          onChange={handleTokenChange}
+          placeholder={inputValue.toString()}
+        />
+      </>
     );
   }
 

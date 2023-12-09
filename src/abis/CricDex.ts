@@ -352,7 +352,7 @@ export const CricDex =
       "stateMutability": "payable",
       "type": "receive"
     }
-  ]
+  ] as const
 
 
 

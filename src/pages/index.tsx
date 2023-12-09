@@ -1,10 +1,3 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import Header from "@/components/Header/Header";
-import Table from "@/components/Table/Table";
-import UserCard from "@/components/UserCard/UserCard";
-import { useState } from "react";
-import Link from "next/link";
 import { Router, useRouter } from "next/router";
 
 export default function Home() {
