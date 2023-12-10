@@ -75,7 +75,8 @@ function App({}: Props) {
             ? (scoreVirat / 3).toFixed(2)
             : row.original.id === 2
             ? (scoreRohit / 3).toFixed(2)
-            : null} Dai
+            : null}{" "}
+          Dai
         </span>
       ),
     },
@@ -133,11 +134,6 @@ function App({}: Props) {
           onChange={handleTokenChange}
           placeholder="Enter number of shares"
         />
-        <div className="text-purple-500">
-          ~{" "}
-          {(id === 1 && tokenDaiToBuyVirat) || (id === 2 && tokenDaiToBuyRohit)}{" "}
-          Dai{" "}
-        </div>
       </div>
     );
   }

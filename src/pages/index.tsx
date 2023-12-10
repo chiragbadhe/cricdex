@@ -25,7 +25,7 @@ export default function Home() {
 
           <div>
             <button
-              onClick={() => Router.push("/app")}
+              onClick={() => Router.push("/mainapp")}
               className="px-[24px] py-[12px] bg-[#71FF4C] text-black mt-[24px]"
             >
               Launch App
