@@ -70,4 +70,4 @@ A: CricDex encourages portfolio diversification to mitigate risks associated wit
 
 The implementation of CricDex marks a groundbreaking shift in the landscape of fantasy sports and introduces an impactful fusion of sports and Web3 technology. In the realm of sports, where the influence of Web3 has been relatively limited, CricDex emerges as a pioneering platform, reshaping how enthusiasts engage with cricket. By introducing a dynamic marketplace where users can trade shares based on player performance, CricDex not only injects excitement into the world of fantasy sports but also opens up a new frontier for trading within the sports domain. This innovative approach not only enhances the user experience but also positions CricDex as a trailblazer in exploring the potential intersections between sports and decentralized technologies, setting the stage for a novel era of sports trading and engagement.
 
-![plot](./flow.png)
+![flowchart](./flow.png)
